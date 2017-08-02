@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+$projectLocations = [
+    [
+        'autoload' => __DIR__ . '/../vendor/autoload.php',
+        'project_path' => __DIR__ . '/..',
+    ],
+    [
+        'autoload' => __DIR__ . '/../../../../vendor/autoload.php',
+        'project_path' => __DIR__ . '/../../../..',
+    ],
+];
+
+$projectPath = null;
+foreach ($projectLocations as $projectLocation) {
+    if (is_file($projectLocation['autoload'])) {
+        require_once($projectLocation['autoload']);
+        $projectPath = $projectLocation['project_path'];
+        break;
+    }
+}
+
+if (!$projectPath) {
+    throw new \LogicException();
+}
+
+$projectPath = realpath($projectPath);
+
+$app = require __DIR__ . '/../bootstrap/app.php';
+$app->run();

@@ -1,0 +1,32 @@
+{
+    "name": "hexanet/php-git-hooks",
+    "license": "MIT",
+    "type": "project",
+    "description": "Git hooks for PHP projects",
+    "autoload": {
+      "psr-4": {
+        "Hexanet\\PhpGitHooks\\": "src/"
+      }
+    },
+    "require": {
+        "php": ">=7.1",
+        "symfony/process": "~2.8|~3.0",
+        "friendsofphp/php-cs-fixer": "^1.12",
+        "symfony/filesystem": "~2.8|~3.0",
+        "eloquent/composer-config-reader": "^2.0",
+        "php-di/php-di": "^5.4",
+        "mnapoli/silly-php-di": "^1.1"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "~2.8|~3.0",
+        "composer/composer": "^1.2"
+    },
+    "scripts": {
+        "pre-update-cmd": "Hexanet\\PhpGitHooks\\Composer\\InstallHooksScript::installHooks",
+        "pre-install-cmd": "Hexanet\\PhpGitHooks\\Composer\\InstallHooksScript::installHooks"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "bin": ["bin/php-git-hooks"]
+}
