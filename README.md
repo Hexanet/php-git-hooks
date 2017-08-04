@@ -26,3 +26,11 @@ composer.json :
         "pre-install-cmd": "Hexanet\\PhpGitHooks\\Composer\\InstallHooksScript::installHooks"
     }
 ```
+
+## Credits
+
+Developed by the [Dev Team](http://teamdev.hexanet.fr) of [Hexanet](http://www.hexanet.fr/).
+
+## License
+
+[php-git-hooks](https://github.com/Hexanet/php-git-hooks) is licensed under the [MIT license](LICENSE).
