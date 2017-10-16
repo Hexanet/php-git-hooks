@@ -21,10 +21,6 @@
         "symfony/var-dumper": "~2.8|~3.0",
         "composer/composer": "^1.2"
     },
-    "scripts": {
-        "pre-update-cmd": "Hexanet\\PhpGitHooks\\Composer\\InstallHooksScript::installHooks",
-        "pre-install-cmd": "Hexanet\\PhpGitHooks\\Composer\\InstallHooksScript::installHooks"
-    },
     "config": {
         "sort-packages": true
     },
