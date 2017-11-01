@@ -30,18 +30,18 @@ class PhpCsFixerTask
      */
     public function check(SymfonyStyle $io, array $files) : bool
     {
-        $io->section('Vérification des coding styles');
+        $io->section('Checking coding styles');
 
         $phpCsFixerResult = $this->checkWithPhpCsFixer($files);
 
         if (!$phpCsFixerResult['result']) {
-            $io->error('Erreurs de coding styles détectées');
-            $io->table(['Fichier', 'Erreur(s)'], $phpCsFixerResult['errors']);
+            $io->error('Coding styles errors detected');
+            $io->table(['File', 'Error(s)'], $phpCsFixerResult['errors']);
 
             $this->fixWithPhpCsFixer($files);
-            $io->comment('Coding styles corrigés avec succès');
+            $io->comment('Coding styles successfully corrected');
         } else {
-            $io->comment('Aucune erreur de coding styles détectée');
+            $io->comment('No coding style error detected');
         }
 
         return true;

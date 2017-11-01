@@ -15,18 +15,18 @@ class LintTask
      */
     public function check(SymfonyStyle $io, array $files) : bool
     {
-        $io->section('Vérification de la syntaxe des fichiers PHP');
+        $io->section('Checking the syntax of PHP files');
 
         $phpLintResult = $this->checkWithPhpLint($files);
 
         if (!$phpLintResult['result']) {
-            $io->error('Erreurs de syntaxe détectés');
-            $io->table(['Fichier', 'Erreur'], $phpLintResult['errors']);
+            $io->error('Syntax errors detected');
+            $io->table(['File', 'Error'], $phpLintResult['errors']);
 
             return false;
         }
 
-        $io->comment('Aucune erreur de syntaxe détectée');
+        $io->comment('No syntax error detected');
 
         return true;
     }
