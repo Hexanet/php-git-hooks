@@ -11,20 +11,21 @@ class InstallHooksScript
     {
         $fs = new Filesystem();
 
-        $hook = 'pre-commit';
-        $hookPath = '.git/hooks/'.$hook;
+        $hookPath = '.git/hooks/pre-commit';
 
         if ($fs->exists($hookPath)) {
             $fs->remove([$hookPath]);
         }
 
+        $binDir = $event->getComposer()->getConfig()->get('bin-dir');
+
         $hookFile = <<<'HOOK'
 #!/bin/sh
 
-exec ./bin/php-git-hooks pre-commit
+exec %s/php-git-hooks pre-commit
 HOOK;
 
-        $fs->dumpFile($hookPath, $hookFile);
+        $fs->dumpFile($hookPath, sprintf($hookFile, $binDir));
         $fs->chmod($hookPath, 0775);
     }
 }
