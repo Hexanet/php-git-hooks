@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "143f786c3f400a8c2fee8b96dd2504c8",
+    "content-hash": "97cdca575bb0cccf237b6600652b843a",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -39,16 +39,16 @@
         },
         {
             "name": "eloquent/composer-config-reader",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/composer-config-reader.git",
-                "reference": "873dfd6d2b38c14bf1bfd0deb0f54ac7e11d1a14"
+                "reference": "ee83a1cad8f68508f05b30c376003045a7cdfcd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/composer-config-reader/zipball/873dfd6d2b38c14bf1bfd0deb0f54ac7e11d1a14",
-                "reference": "873dfd6d2b38c14bf1bfd0deb0f54ac7e11d1a14",
+                "url": "https://api.github.com/repos/eloquent/composer-config-reader/zipball/ee83a1cad8f68508f05b30c376003045a7cdfcd8",
+                "reference": "ee83a1cad8f68508f05b30c376003045a7cdfcd8",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "parser",
                 "reader"
             ],
-            "time": "2016-12-20T03:37:03+00:00"
+            "time": "2017-11-02T01:07:08+00:00"
         },
         {
             "name": "eloquent/enumeration",
