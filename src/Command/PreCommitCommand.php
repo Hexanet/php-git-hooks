@@ -24,17 +24,16 @@ class PreCommitCommand
 
         $io->title('PHP Git Hooks');
 
-        $io->comment('Récupération des fichiers en cours');
         $files = $this->extractCommitedFiles();
 
         if (!$files) {
-            $io->comment('Aucun fichier à vérifier');
+            $io->comment('No files to check');
 
             return 0;
         }
 
         $io->comment(sprintf(
-            '%d fichiers à vérifier',
+            '%d files to check',
             count($files)
         ));
 

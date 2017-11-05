@@ -31,15 +31,15 @@ class CheckComposerTask
             return true;
         }
 
-        $io->section('Vérification du composer.lock');
+        $io->section('Checking composer.lock');
 
         if ($composerJsonDetected && !$composerLockDetected) {
-            $io->error('Le fichier composer.lock doit être commité lorsque le fichier composer.json est modifié');
+            $io->error('The composer.lock file must be committed when the composer.json file is modified');
 
             return false;
         }
 
-        $io->comment('Fichier composer.json valide');
+        $io->comment('composer.json is valid');
 
         return true;
     }
