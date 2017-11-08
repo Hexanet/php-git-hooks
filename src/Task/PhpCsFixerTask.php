@@ -70,7 +70,10 @@ class PhpCsFixerTask
                 $output = json_decode($phpCsFixer->getOutput(), true);
 
                 if (!$output) {
-                    continue;
+                    throw new \LogicException(sprintf(
+                        'PHP-CS-Fixer failed to check the files, to have more informations execute: %s',
+                        $phpCsFixer->getCommandLine()
+                    ));
                 }
 
                 $resultForFile = reset($output['files']);
