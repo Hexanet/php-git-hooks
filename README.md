@@ -13,7 +13,7 @@ Features :
 ## Installation
 
 ```
-composer require hexanet/php-git-hooks:dev-master
+composer require hexanet/php-git-hooks
 ```
 
 
