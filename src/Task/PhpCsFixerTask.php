@@ -5,7 +5,6 @@ namespace Hexanet\PhpGitHooks\Task;
 use Eloquent\Composer\Configuration\Element\Configuration;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 use Eloquent\Composer\Configuration\ConfigurationReader;
 
 class PhpCsFixerTask
@@ -15,20 +14,11 @@ class PhpCsFixerTask
      */
     private $projectPath;
 
-    /**
-     * @param string $projectPath
-     */
     public function __construct(string $projectPath)
     {
         $this->projectPath = $projectPath;
     }
 
-    /**
-     * @param SymfonyStyle $io
-     * @param array        $files
-     *
-     * @return bool
-     */
     public function check(SymfonyStyle $io, array $files) : bool
     {
         $io->section('Checking coding standards');
@@ -47,12 +37,8 @@ class PhpCsFixerTask
 
         return true;
     }
-    /**
-     * @param array $files
-     *
-     * @return array
-     */
-    private function checkWithPhpCsFixer(array $files)
+
+    private function checkWithPhpCsFixer(array $files) : array
     {
         $succeed = true;
         $errors = [];
@@ -96,36 +82,30 @@ class PhpCsFixerTask
         ];
     }
 
-    /**
-     * @param array $files
-     */
     private function fixWithPhpCsFixer(array $files)
     {
-        $phpCsFixerProcessBuilder = new ProcessBuilder(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', '--config-file=.php_cs', 'fix']);
-        $phpCsFixerProcessBuilder->setWorkingDirectory($this->projectPath);
+        $phpCsFixerProcess = new Process(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', '--config-file=.php_cs', 'fix']);
+        $phpCsFixerProcess->setWorkingDirectory($this->projectPath);
 
-        $gitAddProcessBuilder = new ProcessBuilder(['git', 'add']);
-        $gitAddProcessBuilder->setWorkingDirectory($this->projectPath);
+        $gitAddProcess = new Process(['git', 'add']);
+        $gitAddProcess->setWorkingDirectory($this->projectPath);
 
         foreach ($files as $file) {
             if (strpos($file, '.php') === false) {
                 continue;
             }
 
-            $filePhpCsFixerProcessBuilder = clone $phpCsFixerProcessBuilder;
+            $filePhpCsFixerProcessBuilder = clone $phpCsFixerProcess;
             $filePhpCsFixerProcessBuilder->add($file);
-            $filePhpCsFixerProcessBuilder->getProcess()->run();
+            $filePhpCsFixerProcessBuilder->run();
 
-            $fileGitAddProcessBuilder = clone $gitAddProcessBuilder;
+            $fileGitAddProcessBuilder = clone $gitAddProcess;
             $fileGitAddProcessBuilder->add($file);
-            $fileGitAddProcessBuilder->getProcess()->run();
+            $fileGitAddProcessBuilder->run();
         }
     }
 
-    /**
-     * @return Configuration
-     */
-    private function getComposerConfiguration()
+    private function getComposerConfiguration() : Configuration
     {
         $reader = new ConfigurationReader();
         $reader = $reader->read('composer.json');

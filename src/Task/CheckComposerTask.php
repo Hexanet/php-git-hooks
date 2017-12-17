@@ -6,12 +6,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CheckComposerTask
 {
-    /**
-     * @param SymfonyStyle $io
-     * @param array        $files
-     *
-     * @return bool
-     */
     public function check(SymfonyStyle $io, array $files) : bool
     {
         $composerJsonDetected = false;

@@ -11,13 +11,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class PreCommitCommand
 {
-    /**
-     * @param string          $projectPath
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
     public function __invoke(string $projectPath, InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
@@ -50,9 +43,6 @@ class PreCommitCommand
         }
     }
 
-    /**
-     * @return array
-     */
     private function extractCommitedFiles() : array
     {
         $output = [];

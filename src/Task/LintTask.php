@@ -8,12 +8,6 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class LintTask
 {
-    /**
-     * @param SymfonyStyle $io
-     * @param array        $files
-     *
-     * @return bool
-     */
     public function check(SymfonyStyle $io, array $files) : bool
     {
         $io->section('Checking the syntax of PHP files');
@@ -32,12 +26,7 @@ class LintTask
         return true;
     }
 
-    /**
-     * @param array $files
-     *
-     * @return array
-     */
-    private function checkWithPhpLint($files)
+    private function checkWithPhpLint($files) : array
     {
         $needle = '/(\.php)|(\.inc)$/';
 
