@@ -91,7 +91,6 @@ class PhpCsFixerTask
 
             $filePhpCsFixerProcessBuilder = new Process(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', 'fix'] + [$file]);
             $filePhpCsFixerProcessBuilder->setWorkingDirectory($this->projectPath);
-            $filePhpCsFixerProcessBuilder->add($file);
             $filePhpCsFixerProcessBuilder->run();
 
             $fileGitAddProcessBuilder = new Process(['git', 'add'] + [$file]);
