@@ -4,6 +4,7 @@ namespace Hexanet\PhpGitHooks\Task;
 
 use Eloquent\Composer\Configuration\Element\Configuration;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 use Eloquent\Composer\Configuration\ConfigurationReader;
 
@@ -61,13 +62,13 @@ class PhpCsFixerTask
                 continue;
             }
 
-            $processBuilder = new ProcessBuilder(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', '--config-file=.php_cs', '--dry-run', '--format=json', '-v', 'fix', $file]);
-            $processBuilder->setWorkingDirectory($this->projectPath);
-            $phpCsFixer = $processBuilder->getProcess();
+            $phpCsFixer = new Process(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', '--dry-run', '--format=json', '-v', 'fix', $file]);
+            $phpCsFixer->setWorkingDirectory($this->projectPath);
             $phpCsFixer->run();
 
             if (!$phpCsFixer->isSuccessful()) {
                 $output = json_decode($phpCsFixer->getOutput(), true);
+
 
                 if (!$output) {
                     throw new \RuntimeException(sprintf(
