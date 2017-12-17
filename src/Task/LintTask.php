@@ -3,6 +3,7 @@
 namespace Hexanet\PhpGitHooks\Task;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 
 class LintTask
@@ -48,8 +49,7 @@ class LintTask
                 continue;
             }
 
-            $processBuilder = new ProcessBuilder(array('php', '-l', $file));
-            $process = $processBuilder->getProcess();
+            $process = new Process(['php', '-l', $file]);
             $process->run();
 
             if (!$process->isSuccessful()) {
