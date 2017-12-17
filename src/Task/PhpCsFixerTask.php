@@ -84,23 +84,18 @@ class PhpCsFixerTask
 
     private function fixWithPhpCsFixer(array $files)
     {
-        $phpCsFixerProcess = new Process(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', '--config-file=.php_cs', 'fix']);
-        $phpCsFixerProcess->setWorkingDirectory($this->projectPath);
-
-        $gitAddProcess = new Process(['git', 'add']);
-        $gitAddProcess->setWorkingDirectory($this->projectPath);
-
         foreach ($files as $file) {
             if (strpos($file, '.php') === false) {
                 continue;
             }
 
-            $filePhpCsFixerProcessBuilder = clone $phpCsFixerProcess;
+            $filePhpCsFixerProcessBuilder = new Process(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', 'fix'] + [$file]);
+            $filePhpCsFixerProcessBuilder->setWorkingDirectory($this->projectPath);
             $filePhpCsFixerProcessBuilder->add($file);
             $filePhpCsFixerProcessBuilder->run();
 
-            $fileGitAddProcessBuilder = clone $gitAddProcess;
-            $fileGitAddProcessBuilder->add($file);
+            $fileGitAddProcessBuilder = new Process(['git', 'add'] + [$file]);
+            $fileGitAddProcessBuilder->setWorkingDirectory($this->projectPath);
             $fileGitAddProcessBuilder->run();
         }
     }
