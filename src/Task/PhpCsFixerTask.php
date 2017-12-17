@@ -89,11 +89,11 @@ class PhpCsFixerTask
                 continue;
             }
 
-            $filePhpCsFixerProcessBuilder = new Process(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', 'fix'] + [$file]);
+            $filePhpCsFixerProcessBuilder = new Process(['php', $this->getComposerConfiguration()->config()->binDir().'/php-cs-fixer', 'fix', $file]);
             $filePhpCsFixerProcessBuilder->setWorkingDirectory($this->projectPath);
             $filePhpCsFixerProcessBuilder->run();
 
-            $fileGitAddProcessBuilder = new Process(['git', 'add'] + [$file]);
+            $fileGitAddProcessBuilder = new Process(['git', 'add', $file]);
             $fileGitAddProcessBuilder->setWorkingDirectory($this->projectPath);
             $fileGitAddProcessBuilder->run();
         }
