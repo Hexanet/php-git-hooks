@@ -8,6 +8,12 @@
         "Hexanet\\PhpGitHooks\\": "src/"
       }
     },
+    "authors": [
+        {
+            "name": "Floran Brutel",
+            "email": "fbrutel@hexanet.fr"
+        }
+    ],
     "require": {
         "php": ">=7.1",
         "eloquent/composer-config-reader": "^2.1",
